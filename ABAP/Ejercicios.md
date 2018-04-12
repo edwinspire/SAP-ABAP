@@ -14,6 +14,7 @@ De forma similar las constantes se declaran usando la palabra reservada **CONSTA
     REPORT  Z_EDWINSPIRE_02.
 
     * Declaración de variables una por linea. 
+    DATA Contador TYPE I VALUE 0.
     DATA var1 TYPE I.
     DATA var2 TYPE I VALUE 10.
     CONSTANTS const1 TYPE STRING VALUE 'ABAP'.
@@ -32,6 +33,15 @@ De forma similar las constantes se declaran usando la palabra reservada **CONSTA
     * Podemos usar tambien MOVE para asignar los valores de una variable a otra
     MOVE var3 TO var4.
     WRITE: /'var4 = ',var4.
+    DO 8 TIMES.
+      Contador = Contador + 1.
+      " SY-INDEX guarda el contador del LOOP
+      IF SY-INDEX = 5.
+      WRITE: /'SY-INDEX ES = 5'.
+     ELSE.
+      WRITE: /'SY-INDEX ES:', SY-INDEX. "Es el indice del Loop actual.
+      ENDIF.
+    ENDDO.
 
 ## (3) Parámetros de entrada
 En este ejemplo se mostrará en pantalla un cuadro de texto para que el usuario pueda ingresar un dato que se imprimirá en pantalla.
@@ -55,4 +65,46 @@ Imprime en pantalla algunas de las variables del sistema:
 Operaciones básicas con cadenas:
 
     REPORT  Z_EDWINSPIRE_05.
-    WRITE: /'Hola mundo ABAP'.
+    PARAMETERS texto1 TYPE string.
+    DATA: var1 TYPE string VALUE ' Una cadena.', var2 TYPE string, longitud TYPE i VALUE 0.
+
+    WRITE: /'PARAMETRO DE ENTRADA: ', texto1.
+
+    WRITE: /'STRLEN:', /'Obtiene la longitud de una cadena:'.
+    longitud = strlen( texto1 ).
+    WRITE: /'', longitud, ' caracteres'.
+
+    WRITE: /'CONCATENATE:', /'Concadenar el parametro de entrada                            con var1:'.
+    CONCATENATE texto1 var1 INTO var2 SEPARATED BY  '>'.
+    WRITE: /'',var2.
+
+    WRITE: /'CONDENSE:', /'Elimina todos los espacios en blanco al comienzo y al final de la cadena:'.
+    MOVE texto1 TO var1.
+    CONDENSE var1.
+    WRITE: /'',var1.
+
+    WRITE: /'REPLACE:', /'Reemplaza la primera aparición de A por X en la cadena pasada como parámetro:'.
+    var1 = texto1.
+    REPLACE 'A' WITH 'X' INTO var1.
+    WRITE: /'',var1.
+
+    WRITE: /'SEARCH:', /'Busca una cadena (hola) dentro de otra (texto1) y guarda el resultado en la variable del sistema SY-SUBRC (0 si es encontrada, 4 en caso contrario):'.
+    var1 = texto1.
+    SEARCH texto1 FOR 'hola' ABBREVIATED.
+    WRITE: /'', sy-subrc.
+
+    WRITE: /'SHIFT:', /'Elimina los primeros caracteres de una cadena (5 para este ejemplo):'.
+    var1 = texto1.
+    SHIFT var1 BY 3 PLACES.
+    WRITE: /'', var1.
+    
+    WRITE: /'SPLIT:', /'Divide una cadena segun el caracter asignado:'.
+    SPLIT texto1 AT ',' INTO var1 var2.
+    WRITE: /'', var1, var2.
+
+
+    WRITE: /'TRASLATE:', /'Convierte texto a mayusculas o minusculas:'.
+    var1 = texto1.
+    TRANSLATE var1 TO LOWER CASE.
+    WRITE: /'', var1.
+    
