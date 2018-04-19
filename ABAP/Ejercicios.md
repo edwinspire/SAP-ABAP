@@ -108,3 +108,47 @@ Operaciones básicas con cadenas:
     TRANSLATE var1 TO LOWER CASE.
     WRITE: /'', var1.
     
+    
+## (6) sy-vline  Líneas tipo tabla
+**sy-vline** permite crear columnas para delimitar el contenido de un reporte, simulando una tabla.
+
+    REPORT  Z_EDWINSPIRE_06.
+    PARAMETERS: nombre TYPE STRING.
+    DATA index TYPE I VALUE 0.
+
+    WHILE index < 10.
+    WRITE: /'',index, sy-vline,
+    nombre, sy-vline.
+    index = index + 1.
+    ENDWHILE.
+
+## (7) Operaciones matemáticas
+**sy-vline** permite crear columnas para delimitar el contenido de un reporte, simulando una tabla.
+
+    REPORT  Z_EDWINSPIRE_07.
+    PARAMETERS: numero TYPE I.
+    DATA: A TYPE F VALUE 100.
+    DATA: R TYPE F.
+
+    WRITE: /'Su número: ',numero.
+
+    R = numero + 100. WRITE: /'Suma: ',numero,' + 100 = ',R.
+    A = R - 78. WRITE :  /'Resta: ',R,' - 78 = ',A.
+    A = R / 2. WRITE : /'División: ',R,' / 2 = ',A.
+    A = R * 25. WRITE : /'Multiplicación: ',R,' * 25 = ',A.
+    A = R DIV 3. WRITE : /'División entera: ',R,' / 3 = ',A.
+    A = SIN( R ). WRITE : /'Seno de ',R,' = ',A.
+    A = COS( R ). WRITE :  /'Coseno de ',R,' = ',A.
+    A = SQRT( R ). WRITE : /'Raíz cuadrada de ',R,' = ',A.
+    A = LOG( R ). WRITE : /'Logaritmo neperiano de ',R,' = ',A.
+    A = LOG10( R ). WRITE : /'Logaritmo base 10 de ',R,' = ',A.
+
+    WRITE: /'*** REDONDEOS ***'.
+    R = A * -1.
+    A = ABS( R ). WRITE : /'ABS(',R,') = ',A.
+    A = SIGN( R ). WRITE : /'SIGN(',R,') = ',A.
+    A = CEIL( R ). WRITE : /'CECIL(',R,') = ',A.
+    A = FLOOR( R ). WRITE : /'FLOOR(',R,') = ',A.
+    A = TRUNC( R ). WRITE : /'TRUNC(',R,') = ',A.
+    A = FRAC( R ). WRITE : /'FRAC(',R,') = ',A.
+
