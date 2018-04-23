@@ -152,3 +152,30 @@ Operaciones básicas con cadenas:
     A = TRUNC( R ). WRITE : /'TRUNC(',R,') = ',A.
     A = FRAC( R ). WRITE : /'FRAC(',R,') = ',A.
 
+## (8) CHECK
+La instrucción CHECK evalua una condición, si es falsa todo el resto de instrucciones dentro de un LOOP son ignoradas.
+
+    REPORT  Z_EDWINSPIRE_08.
+    DO 5 TIMES.
+    CHECK SY-INDEX BETWEEN 3 AND 4.
+    Write / SY-INDEX.
+    ENDDO.'.
+
+
+## (9) IF ELSEIF ENDIF
+La instrucción CHECK evalua una condición, si es falsa todo el resto de             instrucciones dentro de un LOOP son ignoradas.
+
+    REPORT  z_edwinspire_09.
+    PARAMETERS: nombre TYPE string.
+    DATA resultado TYPE string.
+
+    IF strlen( nombre ) EQ 0.
+      resultado = 'Debe ingresar un nombre'.
+    ELSEIF strlen( nombre ) > 5.
+      resultado = 'Su nombre no puede tener mas de 5 caracteres'.
+    ELSE.
+      CONCATENATE 'Su nombre es' nombre INTO resultado.
+    ENDIF.
+
+    WRITE resultado.
+
